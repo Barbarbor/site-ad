@@ -1,0 +1,640 @@
+body {
+  margin:0;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+ font-size:1rem;
+ font-weight:400;
+ line-height:1.5;
+ color:#212529;
+ background-color:#F2F2F2;
+ overflow-y: auto;
+}
+main {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+/* Навигационная панель и её элементы */
+
+.nav_panel {
+  background-color: black;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+}
+
+.nav_panel ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.standart {
+  display: inline-block;
+}
+
+.standart a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.nav_panel ul li a:hover {
+  background-color: #333;
+}
+
+.search-field {
+  border-radius: 7px;
+  border: 1px solid #00bfff;
+  height: 30px;
+  padding: 5px;
+  width: 250px;
+  margin-right: -6px;
+}
+
+.search-button {
+  margin-left: 1px;
+  height: 42px;
+  padding: 1px;
+  border-radius: 7px;
+  border: 1px solid blue;
+  background-color: blue;
+  cursor: pointer;
+  color: white;
+}
+
+.login_ad {
+  text-align: right;
+  float: right;
+}
+
+.login_ad a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+}
+
+/* Карточка объявления, которая отображается на странице ad_list */
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 30px;
+  margin-left: 300px;
+
+}
+.product-card a {
+  text-decoration: none;
+  color: #009dda;
+}
+.product-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  max-height: 300px;
+  border-radius: 5px;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+
+}
+
+.product-card .price {
+  font-weight: bold;
+}
+
+.product-card .date-added {
+  color: gray;
+}
+
+.pagination-links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-links a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #009dda;
+  border: 1px solid #009dda;
+  border-radius: 5px;
+}
+
+.pagination-links a:hover {
+  background-color: #009dda;
+  color: #fff;
+}
+
+.pagination-links .current-page {
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #009dda;
+}
+
+/* Карточка товара ad_detail */
+
+.ad-detail-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 650px;
+
+}
+
+.ad-detail-card h2 {
+  text-align: left;
+}
+
+.ad-detail-card img {
+  max-width: 500px;
+  max-height: 600px;
+
+}
+
+.ad-detail-card p {
+  margin-bottom: 10px;
+}
+
+.ad-detail-card strong {
+  font-weight: bold;
+}
+
+.ad-detail-card p:last-child {
+  margin-bottom: 0;
+}
+.ad-detail-card .ad-description {
+  word-wrap: break-word;
+  max-width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 100;
+  -webkit-box-orient: vertical;
+}
+.ad-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ad-header-left {
+  flex: 1;
+}
+
+.ad-header-right {
+  margin-left: 20px;
+}
+
+.delete-ad-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top:5px;
+}
+
+.delete-ad-button:hover {
+  background-color: #d32f2f;
+}
+
+.delete-ad-button:active {
+  background-color: #c62828;
+}
+.dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.dialog-text {
+  margin: 0;
+  font-size: 16px;
+}
+
+.dialog-buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.dialog-button {
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.dialog-button:hover {
+  background-color: #d32f2f;
+}
+
+.dialog-button:active {
+  background-color: #c62828;
+}
+
+/* Категории товаров,которые отображаются на странице categories */
+
+.category {
+  display: block;
+  padding: 10px;
+  font-size: 25px;
+  color: blue;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f4f2f2;
+  cursor: pointer;
+}
+
+.category:hover {
+  background-color: #eaeaea;
+}
+
+#category-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#category-list li {
+  margin-bottom: 10px;
+}
+
+/* Форма для входа в аккаунт */
+.login-form {
+  width: 400px;
+  height: 450px;
+  margin: auto;
+  padding: 15px;
+  border: 2px solid #CFCFCF;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #708090;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background-color:  #FFFFFC;
+  font-family: 'Arial', sans-serif;
+}
+
+.login-form button {
+   padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  background-color: #00BFFF;
+  color: white;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+  width: fit-content;
+  margin-top: 10px;
+}
+.login-form p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.login-form .error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.login-form a {
+  color: blue;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.login-form a:hover {
+  text-decoration: none;
+}
+
+/* Форма для регистрации */
+
+.registration-form {
+  width: 400px;
+  max-width: 80%;
+  margin: auto;
+  padding: 30px;
+  border: 2px solid #CFCFCF;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.registration-form h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.registration-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-form .form-group {
+  margin-bottom: 20px;
+}
+.registration-form h5 {
+  font-size: 16px;
+  margin-top: 3px;
+  margin-bottom: 7px;
+  font-weight: normal;
+}
+.registration-form label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #708090;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+  background-color:  #FFFFFC;
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  height: 35px;
+  width: 100%;
+}
+
+.registration-form button {
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  background-color: #00BFFF;
+  color: white;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+  width: fit-content;
+  margin-top: 20px;
+}
+
+.registration-form .login-link {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.registration-form p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.registration-form a {
+  color: blue;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.registration-form a:hover {
+  text-decoration: none;
+}
+
+/* Успешная регистрация - страница registration_end */
+.registration-end-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 15px;
+  border: 2px solid #CFCFCF;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.registration-end-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.registration-end-form p {
+  font-size: 16px;
+}
+
+.registration-end-form .login-link {
+  color: blue;
+  text-decoration: none;
+}
+
+.registration-end-form .login-link:hover {
+  text-decoration: underline;
+}
+
+/* Окно выхода из аккаунта - logout.html */
+
+.logout-form {
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid #ddd;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.logout-form h2 {
+  margin-top: 0;
+}
+
+.logout-form p {
+  margin-bottom: 20px;
+}
+
+.logout-form form {
+  display: inline-block;
+}
+
+.logout-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.logout-form button:hover {
+  background-color: #45a049;
+}
+
+/* Форма создания объявления - edit_ad */
+
+.create-ad-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  max-height: 1200px;
+  overflow-y: auto;
+}
+
+.create-ad-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.create-ad-form input[type="text"],
+.create-ad-form input[type="email"],
+.create-ad-form textarea
+ {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #708090;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+  background-color:  #FFFFFC;
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  height: 35px;
+  width: 100%;
+}
+.create-ad-form textarea {
+  resize: none;
+  overflow: hidden;
+  min-height:250px
+}
+}
+.create-ad-form select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #708090;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+  background-color: #FFFFFC;
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  height: 35px;
+  width: 100%;
+}
+
+.create-ad-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.create-ad-card::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.create-ad-card::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
+}
+.create-ad-card h5 {
+font-weight:normal;
+font-size:15px;
+}
+.create-ad-button {
+  padding: 10px 20px;
+  background-color: #00BFFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.create-ad-button:hover {
+  background-color: #45a049;
+}
+
+/* Форма редактирования объявления - edit_ad */
+
+.edit-ad-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+
+}
+
+.edit-ad-button:hover {
+  background-color: #45a049;
+}
+
+.edit-ad-button:active {
+  background-color: #3e8e41;
+}
+

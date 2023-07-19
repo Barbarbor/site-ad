@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="registration-form">
+    <h2>Регистрация</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}"><h5>Имя</h5></label>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+          <p class="error">{{ form.first_name.errors }}</p>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}"><h5>Логин</h5></label>
+        {{ form.username }}
+        {% if form.username.errors %}
+          <p class="error">{{ form.username.errors }}</p>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}"><h5>Почта</h5></label>
+        {{ form.email }}
+        {% if form.email.errors %}
+          <p class="error">{{ form.email.errors }}</p>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}"><h5>Пароль</h5></label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+          <p class="error">{{ form.password1.errors }}</p>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}"><h5>Подтвердите пароль</h5></label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+          <p class="error">{{ form.password2.errors }}</p>
+        {% endif %}
+      </div>
+      <button type="submit"><h5>Зарегистрироваться</h5></button>
+    </form>
+    <p class="login-link"> <a href="{% url 'login' %}">Вход</a></p>
+  </div>
+{% endblock %}

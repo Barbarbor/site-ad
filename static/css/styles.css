@@ -1,0 +1,32 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  max-height: 300px;
+  border-radius: 5px;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.product-card .price {
+  font-weight: bold;
+}
+
+.product-card .date-added {
+  color: gray;
+}

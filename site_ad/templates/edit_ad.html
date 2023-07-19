@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="create-ad-card">
+    <h2>Редактирование объявления</h2>
+    <div class="create-ad-form">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <h3>Название объявления</h3>
+          {{ form.name }}
+          {% if form.name.errors %}
+            <p class="error">{{ form.name.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <h3>Категория</h3>
+          {{ form.category }}
+          {% if form.category.errors %}
+            <p class="error">{{ form.category.errors }}</p>
+          {% endif %}
+        </div>
+
+   <div class="form-group">
+  <h3>Цена</h3>
+  <input type="text" id="{{ form.price.id_for_label }}" name="{{ form.price.html_name }}" pattern="\d+(\.\d{2})?" value="{{ form.price.value|default_if_none:'' }}" required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+  {% if form.price.errors %}
+    <p class="error">{{ form.price.errors }}</p>
+  {% endif %}
+</div>
+
+
+        <div class="form-group">
+          <h3>Фотография объявления</h3>
+          {{ form.photo }}
+          {% if form.photo.errors %}
+            <p class="error">{{ form.photo.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <h3>Детали объявления</h3>
+          {{ form.description }}
+          {% if form.description.errors %}
+            <p class="error">{{ form.description.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <h3>Контактная информация</h3>
+
+          <div class="form-subgroup">
+            <label for="{{ form.email.id_for_label }}">Электронная почта</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+              <p class="error">{{ form.email.errors }}</p>
+            {% endif %}
+          </div>
+
+          <div class="form-subgroup">
+            <label for="{{ form.phone.id_for_label }}">Номер телефона</label>
+            {{ form.phone }}
+            {% if form.phone.errors %}
+              <p class="error">{{ form.phone.errors }}</p>
+            {% endif %}
+             <script>
+                document.getElementById("id_phone").addEventListener("input", function() {
+                restrictPhoneInput(this);
+            });
+  </script>
+          </div>
+
+          <div class="form-subgroup">
+            <label for="{{ form.location.id_for_label }}">Место проведения сделки</label>
+            {{ form.location }}
+            {% if form.location.errors %}
+              <p class="error">{{ form.location.errors }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <button type="submit" class="create-ad-button">Сохранить</button>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

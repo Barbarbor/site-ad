@@ -1,0 +1,11 @@
+categories.html
+
+{% extends 'base.html' %}
+{% block content %}
+  <h2 style="text-align:center">Категории</h2>
+  <ul id="category-list">
+    {% for category in categories %}
+      <li class="category" onclick="showProducts('{{ category.alias }}')">{{ category.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

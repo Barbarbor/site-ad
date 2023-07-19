@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="ad-detail-card">
+    <h2>{{ ad.name }}</h2>
+    <p style="text-align: right">Создатель объявления: {{ ad.seller.first_name }}</p>
+
+    <div class="ad-header">
+      <div class="ad-header-left">
+        {% if ad.photo %}
+          <img src="{{ ad.photo.url }}" alt="Ad Photo">
+        {% else %}
+          <p>No photo available</p>
+        {% endif %}
+      </div>
+      <div class="ad-header-right">
+        {% if user.is_authenticated and user == ad.seller %}
+          <a href="{% url 'edit_ad' ad_id=ad.id %}" class="edit-ad-button">Редактировать  объявление</a>
+          <button id="delete-ad-button" class="delete-ad-button">Удалить объявление</button>
+        {% endif %}
+      </div>
+    </div>
+    <h3>Описание</h3>
+    <p class="ad-description">{{ ad.description }}</p>
+    <p><strong>Цена: {{ ad.price }} ₽</strong></p>
+
+    {% if user.is_authenticated %}
+      <h2>Контактная информация</h2>
+      <h4>Телефон для связи</h4> {{ ad.phone }}
+      <h4>Электронная почта</h4> {{ ad.email }}
+    {% else %}
+      <p>Контактная информация скрыта для неавторизованных пользователей</p>
+    {% endif %}
+    <h4>Место сделки</h4> {{ ad.location }}
+  </div>
+
+
+  <div id="delete-ad-dialog" class="dialog">
+    <p class="dialog-text">Вы уверены,что хотите удалить объявление?</p>
+    <div class="dialog-buttons">
+      <button id="delete-ad-yes-button" class="dialog-button">Да</button>
+      <button id="delete-ad-no-button" class="dialog-button">Нет</button>
+    </div>
+  </div>
+
+  <script>
+    // Функция удаления объявления
+    document.getElementById("delete-ad-button").addEventListener("click", function() {
+      document.getElementById("delete-ad-dialog").style.display = "block";
+    });
+
+    document.getElementById("delete-ad-yes-button").addEventListener("click", function() {
+      // Perform AJAX request to delete the ad
+      var xhr = new XMLHttpRequest();
+      xhr.open("DELETE", "{% url 'delete_ad' ad_id=ad.id %}");
+      xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 204) {
+            // Объявление удалено
+            alert("Объявление успешно удалено");
+            // Redirect to ad_list page
+            window.location.href = "{% url 'home' %}";
+          } else {
+            // Ошибка
+            alert("Произошла ошибка при удалении объявления");
+          }
+        }
+      };
+      xhr.send();
+
+
+      document.getElementById("delete-ad-dialog").style.display = "none";
+    });
+
+    document.getElementById("delete-ad-no-button").addEventListener("click", function() {
+      document.getElementById("delete-ad-dialog").style.display = "none";
+    });
+  </script>
+{% endblock %}

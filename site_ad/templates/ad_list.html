@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="text-align:center">Список товаров</h2>
+
+  {% if query %}
+    <p>Результаты поиска для "{{ query }}":</p>
+  {% endif %}
+
+  {% if category %}
+    <p>Категория: "{{ category }}"</p>
+  {% endif %}
+
+  {% for ad in page_obj %}
+    <div class="product-card">
+      <a href="{% url 'ad_detail' ad_id=ad.id %}">
+        <h3>{{ ad.name }}</h3>
+        {% if ad.photo %}
+          <img src="{{ ad.photo.url }}" alt="Product Photo">
+        {% else %}
+          <p>No photo available</p>
+        {% endif %}
+      </a>
+      <p class="price">{{ ad.price }}₽</p>
+      <p class="date-added">{{ ad.added_date|date:"d F Y, H:i" }}</p>
+    </div>
+  {% endfor %}
+
+  <div class="pagination-links">
+    {% if page_obj.has_previous %}
+
+      <a href="?page={{ page_obj.previous_page_number }}{% if query %}&query={{ query }}{% endif %}{% if category %}&category={{ category }}{% endif %}">Предыдущая</a>
+    {% endif %}
+
+    {% for i in page_obj.paginator.page_range %}
+      {% if i == page_obj.number %}
+        <span class="current-page">{{ i }}</span>
+      {% elif i > page_obj.number and i <= page_obj.number|add:3 %}
+        <a href="?page={{ i }}{% if query %}&query={{ query }}{% endif %}{% if category %}&category={{ category }}{% endif %}">{{ i }}</a>
+      {% elif i == page_obj.paginator.num_pages %}
+        <a href="?page={{ i }}{% if query %}&query={{ query }}{% endif %}{% if category %}&category={{ category }}{% endif %}">{{ i }}</a>
+      {% elif i == page_obj.number|add:4 %}
+        <span class="ellipsis">...</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}{% if query %}&query={{ query }}{% endif %}{% if category %}&category={{ category }}{% endif %}">Следующая</a>
+    {% endif %}
+  </div>
+{% endblock %}
